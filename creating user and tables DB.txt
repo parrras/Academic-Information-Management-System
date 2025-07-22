@@ -1,0 +1,177 @@
+Creating the user and the tables
+
+creating user
+
+CONNECT system
+Password: test123
+CREATE USER ParasBikramAdhikari IDENTIFIED BY 23048587;
+GRANT CONNECT, RESOURCE to ParasBikramAdhikari;
+CONNECT ParasBikramAdhikari/23048587
+
+
+program
+
+CREATE TABLE Programm
+  (Program_ID Number(10) PRIMARY KEY,
+  Program_Name Character(40) NOT NULL,
+  Duration Character(10) NOT NULL,
+  Start_Date Date NOT NULL,
+  End_Date Date NOT NULL,
+  Program_Code Number(10) NOT NULL,
+  Program_Fee Character(30) NOT NULL);
+
+
+student
+
+ CREATE TABLE Student (
+    student_id NUMBER(10) PRIMARY KEY,
+    first_name CHARACTER(40) NOT NULL,
+    last_name CHARACTER(40) NOT NULL,
+    email CHARACTER(30) UNIQUE,
+    phone_no NUMBER(10) NOT NULL,
+    DOB DATE NOT NULL,
+    address CHARACTER(30) NOT NULL,
+    student_age NUMBER(5) NOT NULL,
+    program_id NUMBER(10) NOT NULL,
+    CONSTRAINT fk_Programm
+        FOREIGN KEY (program_id)
+        REFERENCES Programm(PROGRAM_ID)
+);
+
+
+teacher
+
+CREATE TABLE Teacher (
+    teacher_id NUMBER(10) PRIMARY KEY,      
+    teacher_name CHARACTER(50) NOT NULL,   
+    teacher_no NUMBER(10) NOT NULL,        
+    teacher_email CHARACTER(30) UNIQUE    
+);
+
+
+module
+
+CREATE TABLE Module (
+    module_id NUMBER(10) PRIMARY KEY,         
+    module_name CHARACTER(40) NOT NULL,      
+    credits NUMBER(5) NOT NULL,              
+    module_duration CHARACTER(10) NOT NULL, 
+    module_level NUMBER(05) NOT NULL,         
+    teacher_id NUMBER(10) NOT NULL,                   
+    CONSTRAINT fk_Teacher
+        FOREIGN KEY (teacher_id)
+        REFERENCES Teacher(teacher_id)       
+);
+
+
+
+assessment
+
+CREATE TABLE Assessment (
+    assessment_id NUMBER(10) PRIMARY KEY,    
+    as_title CHARACTER(50) NOT NULL,         
+    as_weightage NUMBER(5) NOT NULL,         
+    as_deadline DATE NOT NULL                                           
+);
+
+
+
+result
+
+CREATE TABLE Result (
+    result_id NUMBER(10) PRIMARY KEY,         
+    mark_obtained NUMBER(5) NOT NULL,        
+    grade CHARACTER(5) NOT NULL,                      
+    assessment_id NUMBER(10) NOT NULL,                
+    CONSTRAINT fk_Assessment
+        FOREIGN KEY (assessment_id)
+        REFERENCES Assessment(assessment_id));
+
+
+
+resources
+
+CREATE TABLE Resources (
+    resource_id NUMBER(10) PRIMARY KEY, 
+    r_title CHARACTER(40) NOT NULL,         
+    r_duration CHARACTER(20) NOT NULL,       
+    r_type CHARACTER(20) NOT NULL);
+
+
+announcement
+
+CREATE TABLE Announcement (
+    announcement_id NUMBER(10) PRIMARY KEY, 
+    an_title CHARACTER(40) NOT NULL,
+    module_id NUMBER(10) NOT NULL,
+    an_date DATE NOT NULL,
+    CONSTRAINT fk_module_M FOREIGN KEY (module_id) REFERENCES Module(module_id)
+);
+
+
+student_module
+
+CREATE TABLE Student_Module (
+    student_id NUMBER(10) NOT NULL,                  
+    module_id NUMBER(10) NOT NULL,                   
+    PRIMARY KEY (student_id, module_id),   
+    CONSTRAINT fk_Student
+        FOREIGN KEY (student_id)
+        REFERENCES Student(student_id),     
+    CONSTRAINT fk_Module
+        FOREIGN KEY (module_id)
+        REFERENCES Module(module_id)       
+);
+
+
+module_assessment
+
+CREATE TABLE Module_Assessment (
+    assessment_id NUMBER(10),                     
+    module_id NUMBER(10),                        
+    student_id NUMBER(10),                        
+    PRIMARY KEY (assessment_id, module_id, student_id), 
+    CONSTRAINT fk_Assessment_Module
+        FOREIGN KEY (assessment_id)
+        REFERENCES Assessment(assessment_id),      
+    CONSTRAINT fk_Module_Module
+        FOREIGN KEY (module_id)
+        REFERENCES Module(module_id),              
+    CONSTRAINT fk_Student_Module
+        FOREIGN KEY (student_id)
+        REFERENCES Student(student_id)             
+);
+
+
+
+
+module_resources
+
+CREATE TABLE Module_Resources (
+    resource_id NUMBER(10),                     
+    module_id NUMBER(10),                        
+    student_id NUMBER(10),                       
+    PRIMARY KEY (resource_id, module_id, student_id), 
+    CONSTRAINT fk_Resource_Resource
+        FOREIGN KEY (resource_id)
+        REFERENCES Resources(resource_id),       
+    CONSTRAINT fk_Module_Resource
+        FOREIGN KEY (module_id)
+        REFERENCES Module(module_id),           
+    CONSTRAINT fk_Student_Resource
+        FOREIGN KEY (student_id)
+        REFERENCES Student(student_id)           
+);
+
+
+module_announcement
+
+CREATE TABLE Module_Announcement (
+    announcement_id NUMBER(10), 
+    module_id NUMBER(10), 
+    student_id NUMBER(10),
+    CONSTRAINT fk_announcement_an FOREIGN KEY (announcement_id) REFERENCES Announcement(announcement_id), 
+    CONSTRAINT fk_module_mn FOREIGN KEY (module_id) REFERENCES Module(module_id), 
+    CONSTRAINT fk_student_sn FOREIGN KEY (student_id) REFERENCES Student(student_id)
+);
+

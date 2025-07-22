@@ -1,0 +1,153 @@
+inserting into tables 
+
+
+program
+
+INSERT INTO Programm VALUES (1001, 'Computer Science', '3', '15-JAN-24', '14-JAN-27', 101, 25000);
+INSERT INTO Programm VALUES (1002, 'Information Technology', '3', '01-FEB-24', '31-JAN-27', 102, 24000);
+INSERT INTO Programm VALUES (1003, 'Business Administration', '3', '01-MAR-24', '28-FEB-27', 103, 23000);
+INSERT INTO Programm VALUES (1004, 'Data Science', '2', '01-APR-24', '31-MAR-26', 104, 26000);
+INSERT INTO Programm VALUES (1005, 'Cybersecurity', '2', '01-MAY-24', '30-APR-26', 105, 27000);
+INSERT INTO Programm VALUES (1006, 'Civil Engineering', '4', '01-JUL-24', '30-JUN-28', 107, 29000);
+INSERT INTO Programm VALUES (1007, 'Artificial Intelligence', '2', '01-AUG-24', '31-JUL-26', 108, 26500);
+
+
+student 
+
+INSERT INTO Student VALUES (10013, 'Mikey', 'Lee', 'mikey.lee@example.com', 9812345678,'15-JAN-2000', 'Kalanki', 24, 1001);
+INSERT INTO Student VALUES (10025, 'Jimmee', 'Smith', 'jimmee.smith@example.com', 9823456789, '20-MAY-2001', 'Baneshwor', 23, 1002);
+INSERT INTO Student VALUES (10037, 'Michael', 'Brown', 'michael.brown@example.com', 9834567890, '12-MAR-1999', 'Lalitpur', 25, 1003);
+INSERT INTO Student VALUES (10045, 'Emily', 'Davis', 'emily.davis@example.com', 9845678901, '30-SEP-2000', 'Thamel', 24, 1004);
+INSERT INTO Student VALUES (10059, 'Chris', 'Wilson', 'chris.wilson@example.com', 9856789012, '01-AUG-2001', 'Kritipur', 23, 1005);
+INSERT INTO Student VALUES (10061, 'Sarah', 'Miller', 'sarah.miller@example.com', 9867890123, '10-NOV-1998', 'Bhaktapur', 26, 1002);
+INSERT INTO Student VALUES (10072, 'David', 'Clark', 'david.clark@example.com', 9878901234, '05-JUL-2002', 'Naxal', 22, 1005);
+
+
+
+teacher
+
+INSERT INTO Teacher VALUES (20001, 'Alice Johnson', 9812345678, 'alice.johnson@example.com');
+INSERT INTO Teacher VALUES (20002, 'Robert Smith', 9823456789, 'robert.smith@example.com');
+INSERT INTO Teacher VALUES (20003, 'Emily Brown', 9834567890, 'emily.brown@example.com');
+INSERT INTO Teacher VALUES (20004, 'Michael Davis', 9845678901, 'michael.davis@example.com');
+INSERT INTO Teacher VALUES (20005, 'Sarah Wilson', 9856789012, 'sarah.wilson@example.com');
+INSERT INTO Teacher VALUES (20006, 'Chris Taylor', 9867890123, 'chris.taylor@example.com');
+INSERT INTO Teacher VALUES (20007, 'David Clark', 9878901234, 'david.clark@example.com');
+
+
+
+module
+
+INSERT INTO Module VALUES (30001, 'Introduction to Programming', 3, '6 Months', 1, 20001);
+INSERT INTO Module VALUES (30002, 'Database Management Systems', 4, '6 Months', 2, 20002);
+INSERT INTO Module VALUES (30003, 'Web Development', 4, '6 Months', 2, 20003);
+INSERT INTO Module VALUES (30004, 'Artificial Intelligence', 5, '1 Year', 3, 20004);
+INSERT INTO Module VALUES (30005, 'Cybersecurity', 4, '1 Year', 3, 20005);
+INSERT INTO Module VALUES (30006, 'Data Science Fundamentals', 5, '1 Year', 3, 20006);
+INSERT INTO Module VALUES (30007, 'Advanced Networking', 4, '6 Months', 2, 20007);
+
+
+assessment
+
+INSERT INTO Assessment VALUES (40001, 'Programming Assignment 1', 20, '15-JAN-2024');
+INSERT INTO Assessment VALUES (40002, 'Database Project', 30, '20-FEB-2024');
+INSERT INTO Assessment VALUES (40003, 'Web Development Lab', 25, '15-MAR-2024');
+INSERT INTO Assessment VALUES (40004, 'AI Midterm Exam', 15, '05-APR-2024');
+INSERT INTO Assessment VALUES (40005, 'Cybersecurity Final Report', 40, '30-MAY-2024');
+INSERT INTO Assessment VALUES (40006, 'Networking Quiz', 10, '10-JUN-2024');
+INSERT INTO Assessment VALUES (40007, 'Data Science Capstone', 50, '01-JUL-2024');
+
+
+resources
+
+INSERT INTO Resources VALUES (50001, 'Python Programming Basics', '3 Hours', 'Video');
+INSERT INTO Resources VALUES (50002, 'Database Design Principles', '2 Hours', 'PDF');
+INSERT INTO Resources VALUES (50003, 'Web Development Tutorial', '5 Hours', 'Video');
+INSERT INTO Resources VALUES (50004, 'AI Fundamentals Guide', '4 Hours', 'eBook');
+INSERT INTO Resources VALUES (50005, 'Cybersecurity Best Practices', '2.5 Hours', 'PDF');
+INSERT INTO Resources VALUES (50006, 'Networking Labs', '3 Hours', 'Lab Manual');
+INSERT INTO Resources VALUES (50007, 'Data Science Introduction', '6 Hours', 'Video');
+
+
+
+result
+
+
+INSERT INTO Result VALUES (20001, 85, 'A', 40001);
+INSERT INTO Result VALUES (20002, 72, 'B+', 40002);
+INSERT INTO Result VALUES (20003, 90, 'A+', 40003);
+INSERT INTO Result VALUES (20004, 65, 'C', 40004);
+INSERT INTO Result VALUES (20005, 78, 'B', 40005);
+INSERT INTO Result VALUES (20006, 88, 'A', 40006);
+INSERT INTO Result VALUES (20007, 95, 'A+', 40007);
+
+
+student_module
+
+INSERT INTO Student_Module VALUES (10013, 30001);
+INSERT INTO Student_Module VALUES (10025, 30002);
+INSERT INTO Student_Module VALUES (10037, 30003);
+INSERT INTO Student_Module VALUES (10045, 30004);
+INSERT INTO Student_Module VALUES (10059, 30005);
+INSERT INTO Student_Module VALUES (10061, 30006);
+INSERT INTO Student_Module VALUES (10072, 30007);
+
+
+
+module_assessment
+
+
+INSERT INTO Module_Assessment VALUES (40001, 30001, 10013);
+INSERT INTO Module_Assessment VALUES (40002, 30002, 10025);
+INSERT INTO Module_Assessment VALUES (40003, 30003, 10037);
+INSERT INTO Module_Assessment VALUES (40004, 30004, 10045);
+INSERT INTO Module_Assessment VALUES (40005, 30005, 10059);
+INSERT INTO Module_Assessment VALUES (40006, 30006, 10061);
+INSERT INTO Module_Assessment VALUES (40007, 30007, 10072);
+
+
+module_resource
+
+
+INSERT INTO Module_Resources  VALUES (50001, 30001, 10013);
+INSERT INTO Module_Resources  VALUES (50002, 30002, 10025);
+INSERT INTO Module_Resources  VALUES (50003, 30003, 10037);
+INSERT INTO Module_Resources  VALUES (50004, 30004, 10045);
+INSERT INTO Module_Resources  VALUES (50005, 30005, 10059);
+INSERT INTO Module_Resources  VALUES (50006, 30006, 10061);
+INSERT INTO Module_Resources  VALUES (50007, 30007, 10072);
+
+
+
+announcement
+
+
+INSERT INTO Announcement VALUES (001, 'Welcome Announcement', 30001, TO_DATE('2024-01-01', 'YYYY-MM-DD'));
+
+INSERT INTO Announcement VALUES (002, 'Midterm Schedule', 30002, TO_DATE('2024-04-01', 'YYYY-MM-DD'));
+
+INSERT INTO Announcement VALUES (003, 'Project Submission Deadline', 30003, TO_DATE('2024-04-05', 'YYYY-MM-DD'));
+
+INSERT INTO Announcement VALUES (004, 'Extra Class on Saturday', 30004, TO_DATE('2024-05-20', 'YYYY-MM-DD'));
+
+INSERT INTO Announcement VALUES (005, 'Final Exam Schedule', 30005, TO_DATE('2024-05-29', 'YYYY-MM-DD'));
+
+INSERT INTO Announcement VALUES (006, 'New Course Material Uploaded', 30006, TO_DATE('2024-01-25', 'YYYY-MM-DD'));
+
+INSERT INTO Announcement VALUES (007, 'Holiday Announcement', 30007, TO_DATE('2024-12-25', 'YYYY-MM-DD'));
+
+
+
+module_announcement
+
+
+INSERT INTO Module_Announcement VALUES (001, 30001, 10013); 
+INSERT INTO Module_Announcement VALUES (002, 30002, 10025); 
+INSERT INTO Module_Announcement VALUES (003, 30003, 10037); 
+INSERT INTO Module_Announcement VALUES (004, 30004, 10045); 
+INSERT INTO Module_Announcement VALUES (005, 30005, 10059); 
+INSERT INTO Module_Announcement VALUES (006, 30006, 10061); 
+INSERT INTO Module_Announcement VALUES (007, 30007, 10072); 
+
+
+

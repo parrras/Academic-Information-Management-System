@@ -1,0 +1,26 @@
+drop queries
+
+
+DROP TABLE module_announcement;
+
+DROP TABLE module_resources;
+
+DROP TABLE module_assessment;
+
+DROP TABLE module_announcement;
+
+DROP TABLE student_module;
+
+DROP TABLE resources;
+
+DROP TABLE announcement;
+
+DROP TABLE result;
+
+DROP TABLE assessment;
+
+DROP TABLE module;
+
+DROP TABLE student;
+
+DROP TABLE programm;

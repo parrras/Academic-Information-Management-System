@@ -1,0 +1,98 @@
+transaction queries
+
+1st transaction query
+
+Purpose: Identify the module that has the latest assessment deadline
+
+SELECT m.module_name, a.as_title, a.as_deadline
+FROM Module m
+JOIN Module_Assessment ma ON m.module_id = ma.module_id
+JOIN Assessment a ON a.assessment_id = ma.assessment_id
+WHERE a.as_deadline = (SELECT MAX(as_deadline) FROM Assessment)
+AND ROWNUM = 1;
+
+
+2nd transaction query
+
+Purpose: Find the top three students who have the highest total score across all modules
+
+SELECT * 
+FROM (
+    SELECT s.student_id, 
+           s.first_name, 
+           s.last_name, 
+           m.module_name, 
+           SUM(r.mark_obtained) AS total_score
+    FROM Result r
+    JOIN Module_Assessment ma ON r.assessment_id = ma.assessment_id
+    JOIN Student_Module sm ON sm.student_id = ma.student_id
+    JOIN Module m ON sm.module_id = m.module_id
+    JOIN Student s ON sm.student_id = s.student_id
+    GROUP BY s.student_id, s.first_name, s.last_name, m.module_name
+    ORDER BY total_score DESC
+)
+WHERE ROWNUM <= 3;
+
+
+3rd transaction query
+
+Purpose: Find the total number of assessments for each program and the average score across all assessments in those programs
+
+SELECT p.program_id, p.program_name,
+       COUNT(a.assessment_id) AS total_assessments,
+       AVG(r.mark_obtained) AS average_score
+FROM Programm p
+JOIN Student s ON p.program_id = s.program_id  
+JOIN Student_Module sm ON s.student_id = sm.student_id  
+JOIN Module m ON sm.module_id = m.module_id  
+JOIN Module_Assessment ma ON m.module_id = ma.module_id 
+JOIN Assessment a ON ma.assessment_id = a.assessment_id  
+JOIN Result r ON a.assessment_id = r.assessment_id 
+GROUP BY p.program_id, p.program_name;
+
+
+4th transaction query
+
+Purpose: List the students who have scored above the average score in the ‘Databases’ module
+
+SELECT s.first_name, s.last_name, s.student_id
+FROM Student s
+JOIN Student_Module sm ON s.student_id = sm.student_id
+JOIN Module m ON sm.module_id = m.module_id
+JOIN Module_Assessment ma ON m.module_id = ma.module_id
+JOIN Assessment a ON ma.assessment_id = a.assessment_id
+JOIN Result r ON a.assessment_id = r.assessment_id
+WHERE m.module_name = 'Database Management Systems'
+AND r.mark_obtained >= (
+    SELECT AVG(r2.mark_obtained)
+    FROM Result r2
+    JOIN Assessment a2 ON r2.assessment_id = a2.assessment_id
+    JOIN Module_Assessment ma2 ON a2.assessment_id = ma2.assessment_id
+    JOIN Module m2 ON ma2.module_id = m2.module_id
+    WHERE m2.module_name = 'Database Management Systems'
+);
+
+
+5th transaction query
+
+Purpose: Display whether a student has passed or failed as remarks as per their total aggregate marks obtained in a particular module
+
+SELECT 
+    s.first_name,
+    s.last_name,
+    m.module_name,
+    SUM(r.mark_obtained) AS total_marks,
+    SUM(a.as_weightage) AS total_weightage,
+    CASE 
+        WHEN (SUM(r.mark_obtained) / SUM(a.as_weightage)) * 100 >= 50 THEN 'Pass'
+        ELSE 'Fail'
+    END AS remarks
+FROM Student s
+JOIN Student_Module sm ON s.student_id = sm.student_id
+JOIN Module m ON sm.module_id = m.module_id
+JOIN Module_Assessment ma ON m.module_id = ma.module_id
+JOIN Assessment a ON ma.assessment_id = a.assessment_id
+JOIN Result r ON a.assessment_id = r.assessment_id
+GROUP BY s.first_name, s.last_name, m.module_name;
+
+
